@@ -1,10 +1,4 @@
-''' Example on how to run a SimNIBS TMS simulation in Python
-    Run with:
 
-    simnibs_python TMS.py
-
-    Copyright (C) 2018 Guilherme B Saturnino
-'''
 import os
 from simnibs import sim_struct, run_simnibs
 #print("paso1")
