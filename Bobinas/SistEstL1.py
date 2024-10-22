@@ -81,11 +81,11 @@ def spiral2(outer_diam2: float, inner_diam: float, wire_diam: float, segment_cou
     # Calculates the radius of every line segment in the spiral
     radius_loop = outer_diam / 2 - wire_diam / 2 * phi / (2 * np.pi)
     # Coil pitch
-    altura2=-h2/(2*np.pi*N2)
+    pitch2=-h2/(2*np.pi*N2)
     # Calculates the cartesian coordinates of the spiral
     path = np.array(
-        [outer_diam2 * np.cos(phi), outer_diam2 * np.sin(phi), altura2*phi]#donde pone outer_diam, habra que poner el radio de la bobina
-    )#
+        [outer_diam2 * np.cos(phi), outer_diam2 * np.sin(phi), pitch2*phi]
+    )
 
     return path
 
@@ -159,11 +159,11 @@ def spiral4(outer_diam2: float, inner_diam: float, wire_diam: float, segment_cou
     # Calculates the radius of every line segment in the spiral
     radius_loop = outer_diam / 2 - wire_diam / 2 * phi / (2 * np.pi)
     # Coil pitch
-    altura2=-h2/(2*np.pi*N2)
+    pitch2=-h2/(2*np.pi*N2)
     # Calculates the cartesian coordinates of the spiral
     path = np.array(
-        [outer_diam2 * np.cos(phi), outer_diam2 * np.sin(phi), altura2*phi]#donde pone outer_diam, habra que poner el radio de la bobina
-    )#
+        [outer_diam2 * np.cos(phi), outer_diam2 * np.sin(phi), pitch2*phi]
+    )
 
     return path
 
@@ -315,10 +315,10 @@ def spiral8(outer_diam2: float, inner_diam: float, wire_diam: float, segment_cou
     # Calculates the radius of every line segment in the spiral
     radius_loop = outer_diam / 2 - wire_diam / 2 * phi / (2 * np.pi)
     # Coil pitch
-    altura2=-h2/(2*np.pi*N2)
+    pitch2=-h2/(2*np.pi*N2)
     # Calculates the cartesian coordinates of the spiral
     path = np.array(
-        [outer_diam2 * np.cos(phi), outer_diam2 * np.sin(phi), altura2*phi]#donde pone outer_diam, habra que poner el radio de la bobina
+        [outer_diam2 * np.cos(phi), outer_diam2 * np.sin(phi), pitch2*phi]
     )
 
     return path
