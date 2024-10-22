@@ -1,6 +1,7 @@
 """
-Example of how to create a simple parametric figure of 8 TMS coil and save it in the tcd format.
+Script to create a parametric figure of TMS coil and save it in the tcd format.
 The coil is constructed using line segments which reconstruct the windings of the coil.
+This is a 4 coil stimulator compound by coils L1
 """
 
 import numpy as np
@@ -9,7 +10,7 @@ from simnibs.simulation.tms_coil.tms_coil import TmsCoil
 from simnibs.simulation.tms_coil.tms_coil_element import LineSegmentElements
 from simnibs.simulation.tms_coil.tms_stimulator import TmsStimulator
 
-
+# Each function spiral is to create a coil, odds are for core and even for coils
 def spiral(outer_diam: float, inner_diam: float, wire_diam: float, segment_count: int):
     """Creates a spiral path based on the inner and outer diameter of the coil as well as
     the diameter of the wire and the segment count.
@@ -31,21 +32,21 @@ def spiral(outer_diam: float, inner_diam: float, wire_diam: float, segment_count
     """
     # Calculates the maximal spiral angle
     phi_max = 2 * np.pi * (outer_diam / 2 - inner_diam / 2) / (wire_diam / 2)
+    # Turns of the coil
+    N=3.5
+    # Height of the coil (mm)
+    h=2.625 
 
-    N=3.5 #Numero de vueltas
-    h=2.625 #Altura de la bobina en mm
-
-    # Evenly spaced angles between 30 degrees and phi_max
-    phi = np.linspace(0, 2*np.pi*N, segment_count)#El numero que multiplica el 2*pi del segundo parametro equivale al numero de vueltas
+    #Evenly spaced angles
+    phi = np.linspace(0, 2*np.pi*N, segment_count)
     # Calculates the radius of every line segment in the spiral
     radius_loop = outer_diam / 2 - wire_diam / 2 * phi / (2 * np.pi)
-    #Array de altura
-    #altura = np.linspace(0,-14/(2*np.pi*18),segment_count)
-    altura=-h/(2*np.pi*N) #Este valor es la altura de la bobina (h) entre 2*pi por el numero de vueltas(N). -h/(2*pi*N) el menos es para que la espira "crezca" hacia afuera y no hacia el craneo
+    # Coil pitch
+    pitch=-h/(2*np.pi*N) 
     # Calculates the cartesian coordinates of the spiral
     path = np.array(
-        [outer_diam * np.cos(phi), outer_diam * np.sin(phi), altura*phi]#donde pone outer_diam, habra que poner el radio de la bobina
-    )#
+        [outer_diam * np.cos(phi), outer_diam * np.sin(phi), pitch*phi]
+    )
 
     return path
 
@@ -70,17 +71,17 @@ def spiral2(outer_diam2: float, inner_diam: float, wire_diam: float, segment_cou
     """
     # Calculates the maximal spiral angle
     phi_max = 2 * np.pi * (outer_diam / 2 - inner_diam / 2) / (wire_diam / 2)
+    # Turns of the coil
+    N2=68.5 
+    # Height of the coil (mm)
+    h2=15 
 
-    N2=68.5 #Numero de vueltas
-    h2=15 #Altura de la bobina en mm
-
-    # Evenly spaced angles between 30 degrees and phi_max
-    phi = np.linspace(2*np.pi*N2, 0, segment_count)#El numero que multiplica el 2*pi del segundo parametro equivale al numero de vueltas
+    # Evenly spaced angles 
+    phi = np.linspace(2*np.pi*N2, 0, segment_count)
     # Calculates the radius of every line segment in the spiral
     radius_loop = outer_diam / 2 - wire_diam / 2 * phi / (2 * np.pi)
-    #Array de altura
-    #altura = np.linspace(0,-14/(2*np.pi*18),segment_count)
-    altura2=-h2/(2*np.pi*N2) #Este valor es la altura de la bobina (h) entre 2*pi por el numero de vueltas(N). -h/(2*pi*N) el menos es para que la espira "crezca" hacia afuera y no hacia el craneo
+    # Coil pitch
+    altura2=-h2/(2*np.pi*N2)
     # Calculates the cartesian coordinates of the spiral
     path = np.array(
         [outer_diam2 * np.cos(phi), outer_diam2 * np.sin(phi), altura2*phi]#donde pone outer_diam, habra que poner el radio de la bobina
@@ -109,21 +110,21 @@ def spiral3(outer_diam: float, inner_diam: float, wire_diam: float, segment_coun
     """
     # Calculates the maximal spiral angle
     phi_max = 2 * np.pi * (outer_diam / 2 - inner_diam / 2) / (wire_diam / 2)
+    # Turns of the coil
+    N=3.5
+    # Height of the coil (mm)
+    h=2.625 
 
-    N=3.5 #Numero de vueltas
-    h=2.625 #Altura de la bobina en mm
-
-    # Evenly spaced angles between 30 degrees and phi_max
-    phi = np.linspace(0, 2*np.pi*N, segment_count)#El numero que multiplica el 2*pi del segundo parametro equivale al numero de vueltas
+    #Evenly spaced angles
+    phi = np.linspace(0, 2*np.pi*N, segment_count)
     # Calculates the radius of every line segment in the spiral
     radius_loop = outer_diam / 2 - wire_diam / 2 * phi / (2 * np.pi)
-    #Array de altura
-    #altura = np.linspace(0,-14/(2*np.pi*18),segment_count)
-    altura=-h/(2*np.pi*N) #Este valor es la altura de la bobina (h) entre 2*pi por el numero de vueltas(N). -h/(2*pi*N) el menos es para que la espira "crezca" hacia afuera y no hacia el craneo
+    # Coil pitch
+    pitch=-h/(2*np.pi*N) 
     # Calculates the cartesian coordinates of the spiral
     path = np.array(
-        [outer_diam * np.cos(phi), outer_diam * np.sin(phi), altura*phi]#donde pone outer_diam, habra que poner el radio de la bobina
-    )#
+        [outer_diam * np.cos(phi), outer_diam * np.sin(phi), pitch*phi]
+    )
 
     return path
 
@@ -148,17 +149,17 @@ def spiral4(outer_diam2: float, inner_diam: float, wire_diam: float, segment_cou
     """
     # Calculates the maximal spiral angle
     phi_max = 2 * np.pi * (outer_diam / 2 - inner_diam / 2) / (wire_diam / 2)
+    # Turns of the coil
+    N2=68.5 
+    # Height of the coil (mm)
+    h2=15 
 
-    N2=68.5 #Numero de vueltas
-    h2=15 #Altura de la bobina en mm
-
-    # Evenly spaced angles between 30 degrees and phi_max
-    phi = np.linspace(2*np.pi*N2, 0, segment_count)#El numero que multiplica el 2*pi del segundo parametro equivale al numero de vueltas
+    # Evenly spaced angles 
+    phi = np.linspace(2*np.pi*N2, 0, segment_count)
     # Calculates the radius of every line segment in the spiral
     radius_loop = outer_diam / 2 - wire_diam / 2 * phi / (2 * np.pi)
-    #Array de altura
-    #altura = np.linspace(0,-14/(2*np.pi*18),segment_count)
-    altura2=-h2/(2*np.pi*N2) #Este valor es la altura de la bobina (h) entre 2*pi por el numero de vueltas(N). -h/(2*pi*N) el menos es para que la espira "crezca" hacia afuera y no hacia el craneo
+    # Coil pitch
+    altura2=-h2/(2*np.pi*N2)
     # Calculates the cartesian coordinates of the spiral
     path = np.array(
         [outer_diam2 * np.cos(phi), outer_diam2 * np.sin(phi), altura2*phi]#donde pone outer_diam, habra que poner el radio de la bobina
@@ -187,21 +188,21 @@ def spiral5(outer_diam: float, inner_diam: float, wire_diam: float, segment_coun
     """
     # Calculates the maximal spiral angle
     phi_max = 2 * np.pi * (outer_diam / 2 - inner_diam / 2) / (wire_diam / 2)
+    # Turns of the coil
+    N=3.5
+    # Height of the coil (mm)
+    h=2.625 
 
-    N=3.5 #Numero de vueltas
-    h=2.625 #Altura de la bobina en mm
-
-    # Evenly spaced angles between 30 degrees and phi_max
-    phi = np.linspace(0, 2*np.pi*N, segment_count)#El numero que multiplica el 2*pi del segundo parametro equivale al numero de vueltas
+    #Evenly spaced angles
+    phi = np.linspace(0, 2*np.pi*N, segment_count)
     # Calculates the radius of every line segment in the spiral
     radius_loop = outer_diam / 2 - wire_diam / 2 * phi / (2 * np.pi)
-    #Array de altura
-    #altura = np.linspace(0,-14/(2*np.pi*18),segment_count)
-    altura=-h/(2*np.pi*N) #Este valor es la altura de la bobina (h) entre 2*pi por el numero de vueltas(N). -h/(2*pi*N) el menos es para que la espira "crezca" hacia afuera y no hacia el craneo
+    # Coil pitch
+    pitch=-h/(2*np.pi*N) 
     # Calculates the cartesian coordinates of the spiral
     path = np.array(
-        [outer_diam * np.cos(phi), outer_diam * np.sin(phi), altura*phi]#donde pone outer_diam, habra que poner el radio de la bobina
-    )#
+        [outer_diam * np.cos(phi), outer_diam * np.sin(phi), pitch*phi]
+    )
 
     return path
 
@@ -226,17 +227,17 @@ def spiral6(outer_diam2: float, inner_diam: float, wire_diam: float, segment_cou
     """
     # Calculates the maximal spiral angle
     phi_max = 2 * np.pi * (outer_diam / 2 - inner_diam / 2) / (wire_diam / 2)
+    # Turns of the coil
+    N2=68.5 
+    # Height of the coil (mm)
+    h2=15 
 
-    N2=68.5 #Numero de vueltas
-    h2=15 #Altura de la bobina en mm
-
-    # Evenly spaced angles between 30 degrees and phi_max
-    phi = np.linspace(2*np.pi*N2, 0, segment_count)#El numero que multiplica el 2*pi del segundo parametro equivale al numero de vueltas
+    # Evenly spaced angles 
+    phi = np.linspace(2*np.pi*N2, 0, segment_count)
     # Calculates the radius of every line segment in the spiral
     radius_loop = outer_diam / 2 - wire_diam / 2 * phi / (2 * np.pi)
-    #Array de altura
-    #altura = np.linspace(0,-14/(2*np.pi*18),segment_count)
-    altura2=-h2/(2*np.pi*N2) #Este valor es la altura de la bobina (h) entre 2*pi por el numero de vueltas(N). -h/(2*pi*N) el menos es para que la espira "crezca" hacia afuera y no hacia el craneo
+    # Coil pitch
+    altura2=-h2/(2*np.pi*N2)
     # Calculates the cartesian coordinates of the spiral
     path = np.array(
         [outer_diam2 * np.cos(phi), outer_diam2 * np.sin(phi), altura2*phi]#donde pone outer_diam, habra que poner el radio de la bobina
@@ -265,21 +266,21 @@ def spiral7(outer_diam: float, inner_diam: float, wire_diam: float, segment_coun
     """
     # Calculates the maximal spiral angle
     phi_max = 2 * np.pi * (outer_diam / 2 - inner_diam / 2) / (wire_diam / 2)
+    # Turns of the coil
+    N=3.5
+    # Height of the coil (mm)
+    h=2.625 
 
-    N=3.5 #Numero de vueltas
-    h=2.625 #Altura de la bobina en mm
-
-    # Evenly spaced angles between 30 degrees and phi_max
-    phi = np.linspace(0, 2*np.pi*N, segment_count)#El numero que multiplica el 2*pi del segundo parametro equivale al numero de vueltas
+    #Evenly spaced angles
+    phi = np.linspace(0, 2*np.pi*N, segment_count)
     # Calculates the radius of every line segment in the spiral
     radius_loop = outer_diam / 2 - wire_diam / 2 * phi / (2 * np.pi)
-    #Array de altura
-    #altura = np.linspace(0,-14/(2*np.pi*18),segment_count)
-    altura=-h/(2*np.pi*N) #Este valor es la altura de la bobina (h) entre 2*pi por el numero de vueltas(N). -h/(2*pi*N) el menos es para que la espira "crezca" hacia afuera y no hacia el craneo
+    # Coil pitch
+    pitch=-h/(2*np.pi*N) 
     # Calculates the cartesian coordinates of the spiral
     path = np.array(
-        [outer_diam * np.cos(phi), outer_diam * np.sin(phi), altura*phi]#donde pone outer_diam, habra que poner el radio de la bobina
-    )#
+        [outer_diam * np.cos(phi), outer_diam * np.sin(phi), pitch*phi]
+    )
 
     return path
 
@@ -304,17 +305,17 @@ def spiral8(outer_diam2: float, inner_diam: float, wire_diam: float, segment_cou
     """
     # Calculates the maximal spiral angle
     phi_max = 2 * np.pi * (outer_diam / 2 - inner_diam / 2) / (wire_diam / 2)
+    # Turns of the coil
+    N2=68.5 
+    # Height of the coil (mm)
+    h2=15 
 
-    N2=68.5 #Numero de vueltas
-    h2=15 #Altura de la bobina en mm
-
-    # Evenly spaced angles between 30 degrees and phi_max
-    phi = np.linspace(2*np.pi*N2, 0, segment_count)#El numero que multiplica el 2*pi del segundo parametro equivale al numero de vueltas
+    # Evenly spaced angles 
+    phi = np.linspace(2*np.pi*N2, 0, segment_count)
     # Calculates the radius of every line segment in the spiral
     radius_loop = outer_diam / 2 - wire_diam / 2 * phi / (2 * np.pi)
-    #Array de altura
-    #altura = np.linspace(0,-14/(2*np.pi*18),segment_count)
-    altura2=-h2/(2*np.pi*N2) #Este valor es la altura de la bobina (h) entre 2*pi por el numero de vueltas(N). -h/(2*pi*N) el menos es para que la espira "crezca" hacia afuera y no hacia el craneo
+    # Coil pitch
+    altura2=-h2/(2*np.pi*N2)
     # Calculates the cartesian coordinates of the spiral
     path = np.array(
         [outer_diam2 * np.cos(phi), outer_diam2 * np.sin(phi), altura2*phi]#donde pone outer_diam, habra que poner el radio de la bobina
