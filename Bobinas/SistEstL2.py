@@ -361,7 +361,7 @@ def figure_of_8_wire_path(
     -------
         The windings of a figure of 8 coil
     """
-    # Generate left spiral of the coil
+    # Generate the spirals of the coils
     path = spiral(outer_diam, inner_diam, wire_diam, segment_count)
     spiral_1 = (
         path + np.array((0, 7.842, -winding_casing_distance))[:, None]  # Global position of the first coil
@@ -369,19 +369,16 @@ def figure_of_8_wire_path(
 
     path = spiral2(outer_diam2, inner_diam, wire_diam, segment_count)
     spiral_2 = np.fliplr(
-         #* np.array((-1, 1, 1))[:, None]
         path + np.array((0, 7.842, -winding_casing_distance))[:, None] # Global position of the first core
     )
 
     path = spiral3(outer_diam, inner_diam, wire_diam, segment_count)
     spiral_3 = np.fliplr(
-         #* np.array((-1, 1, 1))[:, None]
         path + np.array((8.223, 0, -winding_casing_distance))[:, None]  # Global position of the second coil
     )
 
     path = spiral4(outer_diam2, inner_diam, wire_diam, segment_count)
     spiral_4 = np.fliplr(
-         #* np.array((-1, 1, 1))[:, None]
         path + np.array((8.223, 0, -winding_casing_distance))[:, None] # Global position of the second core
     )
 
@@ -392,19 +389,16 @@ def figure_of_8_wire_path(
 
     path = spiral6(outer_diam2, inner_diam, wire_diam, segment_count)
     spiral_6 = np.fliplr(
-         #* np.array((-1, 1, 1))[:, None]
         path + np.array((0, -7.842, -winding_casing_distance))[:, None] # Global position of the third core
     )
 
     path = spiral7(outer_diam, inner_diam, wire_diam, segment_count)
     spiral_7 = np.fliplr(
-         #* np.array((-1, 1, 1))[:, None]
         path + np.array((-8.223, 0, -winding_casing_distance))[:, None]  # Global position of the fourth coil
     )
 
     path = spiral8(outer_diam2, inner_diam, wire_diam, segment_count)
     spiral_8 = np.fliplr(
-         #* np.array((-1, 1, 1))[:, None]
         path + np.array((-8.223, 0, -winding_casing_distance))[:, None] # Global position of the fourth core
     )
 
