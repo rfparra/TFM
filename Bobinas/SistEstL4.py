@@ -361,7 +361,7 @@ def figure_of_8_wire_path(
     -------
         The windings of a figure of 8 coil
     """
-    # Generate left spiral of the coil
+    # Generate the spirals of the coils
 
     path = spiral(outer_diam3, inner_diam, wire_diam2, segment_count)
     spiral_1 = (
@@ -380,7 +380,6 @@ def figure_of_8_wire_path(
 
     path = spiral4(outer_diam4, inner_diam, wire_diam2, segment_count)
     spiral_4 = np.fliplr(
-         #* np.array((-1, 1, 1))[:, None]
         path + np.array((3.5335, 0, -winding_casing_distance))[:, None] # Global position of the second core
     )
     path = spiral5(outer_diam3, inner_diam, wire_diam2, segment_count)
