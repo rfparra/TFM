@@ -1,3 +1,7 @@
+"""
+Script to create a parametric figure of TMS coil and save it in the tcd format.
+The coil is constructed using line segments which reconstruct the windings of the coil.
+"""
 
 import numpy as np
 from simnibs.simulation.tms_coil.tms_coil import TmsCoil
@@ -5,28 +9,69 @@ from simnibs.simulation.tms_coil.tms_coil import TmsCoil
 from simnibs.simulation.tms_coil.tms_coil_element import LineSegmentElements
 from simnibs.simulation.tms_coil.tms_stimulator import TmsStimulator
 
+# Each function spiral is to create a coil, odds are for core and even for coils
 def spiral(radio: float, wire_diam: float, segment_count: int):
+    """Creates a spiral path based on the inner and outer diameter of the coil as well as
+    the diameter of the wire and the segment count.
 
-    N=3.5 #Numero de vueltas
-    h=2.625 #Altura de la bobina en mm
+    Parameters
+    ----------
+    outer_diam : float
+        The outer diameter of the spiral
+    inner_diam : float
+        The inner diameter of the spiral
+    wire_diam : float
+        The diameter of the wire
+    segment_count : int
+        The amount of segments used to represent the spiral
 
+    Returns
+    -------
+        The wire path of the spiral
+    """
+    # Turns of the coil
+    N=3.5
+    # Height of the coil (mm)
+    h=2.625 
+
+    #Evencly spaced angles
     phi = np.linspace(0, 2*np.pi*N, segment_count)
-    paso=-h/(2*np.pi*N) 
+    # Coil pitch
+    pitch=-h/(2*np.pi*N) 
     path = np.array(
-        [radio * np.cos(phi), radio * np.sin(phi), paso*phi]
+        [radio * np.cos(phi), radio * np.sin(phi), pitch*phi]
     )
 
     return path
 
 def spiral2(radio2: float, wire_diam2: float, segment_count2: int):
+    """Creates a spiral path based on the inner and outer diameter of the coil as well as
+    the diameter of the wire and the segment count.
 
-    N2=68.5 #Numero de vueltas
-    h2=15 #Altura de la bobina en mm
+    Parameters
+    ----------
+    outer_diam : float
+        The outer diameter of the spiral
+    inner_diam : float
+        The inner diameter of the spiral
+    wire_diam : float
+        The diameter of the wire
+    segment_count : int
+        The amount of segments used to represent the spiral
 
-    phi = np.linspace(2*np.pi*N2, 0, segment_count)#El numero que multiplica el 2*pi del segundo parametro equivale al numero de vueltas
-    paso2=-h2/(2*np.pi*N2) #Este valor es la altura de la bobina (h) entre 2*pi por el numero de vueltas(N). -h/(2*pi*N) el menos es para que la espira "crezca" hacia afuera y no hacia el craneo
+    Returns
+    -------
+        The wire path of the spiral
+    """
+    # Turns of the coil
+    N2=68.5
+    # Height of the coil (mm)
+    h=15 
+    
+    phi = np.linspace(2*np.pi*N2, 0, segment_count)
+    pitch2=-h2/(2*np.pi*N2) 
     path = np.array(
-        [outer_diam2 * np.cos(phi), outer_diam2 * np.sin(phi), paso2*phi]
+        [outer_diam2 * np.cos(phi), outer_diam2 * np.sin(phi), pitch2*phi]
     )
 
     return path
@@ -42,14 +87,38 @@ def figure_of_wire_path(
     element_distance: float,
     winding_casing_distance: float,
 ):
+     """Generates the windings of a figure of 8 coil
+
+    Parameters
+    ----------
+    wire_diam : float
+        The diameter of the wire
+    segment_count : int
+       The amount of segments used to represent each of the two spirals
+    connection_segment_count : int
+        The amount of segments used to connect the different parts of the coil
+    outer_diam : float
+        The outer diameter of the spiral
+    inner_diam : float
+        The inner diameter of the spiral
+    element_distance : float
+        The center to center distance of the two spirals
+    winding_casing_distance : float
+        The distance of the casing to the windings of the coil
+
+    Returns
+    -------
+        The windings of a figure of 8 coil
+    """
+    # Generate the spirals of the coils
     path = spiral(outer_diam, inner_diam, wire_diam, segment_count)
     spiral_1 = (
-        path + np.array((-element_distance / 2, 0, -winding_casing_distance))[:, None]
+        path + np.array((-element_distance / 2, 0, -winding_casing_distance))[:, None] # Global position of the  coil
     )
 
     path = spiral2(outer_diam2, inner_diam, wire_diam, segment_count)
     spiral_2 = np.fliplr(
-        path + np.array((-element_distance / 2, 0, -winding_casing_distance))[:, None]
+        path + np.array((-element_distance / 2, 0, -winding_casing_distance))[:, None] # Global position of the core
     )
 
     return np.concatenate(
