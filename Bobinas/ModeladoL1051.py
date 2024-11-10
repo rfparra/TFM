@@ -66,7 +66,7 @@ def spiral2(radio2: float, wire_diam2: float, segment_count2: int):
     # Turns of the coil
     N2=70.8
     # Height of the coil (mm)
-    h=15 
+    h2=15 
     
     phi = np.linspace(2*np.pi*N2, 0, segment_count)
     pitch2=-h2/(2*np.pi*N2) 
