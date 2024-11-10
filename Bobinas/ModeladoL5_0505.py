@@ -131,8 +131,8 @@ def figure_of_wire_path(
 
 
 # Set up coil parameters
-wire_diam = 0.18
-wire_diam2 = 0.18
+wire_diam = 0.12
+wire_diam2 = 0.12
 segment_count = 600
 segment_count2 = 600
 connection_segment_count = 20
