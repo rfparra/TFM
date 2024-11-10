@@ -66,7 +66,7 @@ def spiral2(radio2: float, wire_diam2: float, segment_count2: int):
     # Turns of the coil
     N2=68.5
     # Height of the coil (mm)
-    h=15 
+    h2=15 
     
     phi = np.linspace(2*np.pi*N2, 0, segment_count)
     pitch2=-h2/(2*np.pi*N2) 
@@ -175,4 +175,4 @@ tms_coil.generate_element_casings(
 )
 
 # Write the coil to a tcd file
-tms_coil.write("ModeladoBobina.tcd")
+tms_coil.write("ModeladoL10505.tcd")
