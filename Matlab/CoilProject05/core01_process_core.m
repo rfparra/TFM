@@ -14,7 +14,7 @@ end
 
 %%  Define EM constants
 eps0        = 8.85418782e-012;  %   Dielectric permittivity of vacuum(~air)
-mu0         = 1.25663706e-006;  %   Magnetic permeability of vacuum(~air)
+mu0         = 31.82776031e-006;  %   Magnetic permeability of vacuum(~air) 1.25663706e-006
 
 %% Load core 
 name{1}     = 'core.mat'; load(name{1}); 

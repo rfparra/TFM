@@ -13,12 +13,12 @@ end
 
 %   The brick centerline is given first
 par = linspace(0, 1, 100);
-L   = 0.0027;                         %   cylinder height in m
+L   = 0.019;                         %   cylinder height in m
 x = L*par;                          %   segment
 y = 0*par;                          %   segment
 
 %   Other parameters
-d    = 0.00308;      %   conductor diameter in m
+d    = 0.016;      %   conductor diameter in m
 M    = 32;          %   number of cross-section subdivisions 
 flag = 1;           %   circular cross-section    
 
