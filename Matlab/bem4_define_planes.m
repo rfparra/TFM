@@ -5,7 +5,7 @@
 
 %%  Define all three planes (mm)
 X       = 0.0;                  %   YZ Cross-section position, mm
-Y       = -15;                %   XZ Cross-section position, mm
+Y       = -20;                %   XZ Cross-section position, mm
 Z       = 16;                 %   XY Cross-section position, mm
 delta   = 15;                       %   half plane window, mm      
 xmin = X - delta;                   % Cross-section left edge 

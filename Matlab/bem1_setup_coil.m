@@ -12,7 +12,7 @@ load coil.mat;
 
 %%  Position coil
 %   Give the target point (mm)
-TARGET(1, :) = [0 -15 16]; %[1.5+15 -17.0 18.5]13
+TARGET(1, :) = [0 -20 25]; %[1.5+15 -17.0 18.5]13
 ANGLE(1)     = +0.0;
 ANGLE(2)     = -pi/6;
 ANGLE(3)     = -pi/3;
